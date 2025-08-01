@@ -1,70 +1,174 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-        "title": "API de Produtos (Node + Prisma + MySQL[MariaDB])",
-        "version": "1.0.0",
-        "description": "Documentação da API Pedidos"
-    },
-    "servers": [
-        {
-            "url": "http://localhost:3001",
-            "description": "Servidor local"
-        }
-    ],
-    "tags": [
-        {
-            "name": "Teste",
-            "description": "Endpoint de teste da API"
-        },
-        {
-            "name": "CRUD de Usuarios",
-            "description": "Endpoints de usuarios"
-        }
-    ],
-    "paths": {
-        "/": {
-            "get": {
-                "tags": [
-                    "Teste"
-                ],
-                "summary": "Endpoint de teste geral da API",
-                "responses": {
-                    "200": {
-                        "description": "Retorna uma mensagem de teste"
-                    },
-                    "500": {
-                        "description": "Erro ao processar a requisição"
-                    }
-                }
-            }
-        },
-        "/api/usuarios": {
-            "get": {
-                "tags": [
-                    {
-                        "nam": "CRUD de Usuarios"
-                    }
-                ],
-                "summary": "Endpoint para obter todos os usuários",
-                "responses": {
-                    "200": {
-                        "description": "Lista de usuários cadastrados"
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    {
-                        "nam": "CRUD de Usuarios"
-                    }
-                ],
-                "summary": "Endpoint para cadastrar novo usuário",
-                "responses": {
-                    "200": {
-                        "description": "Novo usuário"
-                    }
-                }
-            }
-        }
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API de Produtos (Node + Prisma + MySQL[MariaDB])",
+    "version": "1.0.0",
+    "description": "Documentação da API Pedidos"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3001",
+      "description": "Servidor local"
     }
+  ],
+  "tags": [
+    {
+      "name": "Teste",
+      "description": "Endpoint de teste da API"
+    },
+    {
+      "name": "CRUD de Usuarios",
+      "description": "Endpoints de usuarios"
+    },
+    {
+      "name": "CRUD de Produtos",
+      "description": "Endpoints de produtos"
+    },
+    {
+      "name": "CRUD de Pedidos",
+      "description": "Endpoints de pedidos"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": ["Teste"],
+        "summary": "Endpoint de teste geral da API",
+        "responses": {
+          "200": {
+            "description": "Retorna uma mensagem de teste"
+          },
+          "500": {
+            "description": "Erro ao processar a requisição"
+          }
+        }
+      }
+    },
+    "/api/usuarios": {
+      "get": {
+        "tags": ["CRUD de Usuarios"],
+        "summary": "Listar todos os usuários",
+        "responses": {
+          "200": {
+            "description": "Lista de usuários cadastrados"
+          }
+        }
+      },
+      "post": {
+        "tags": ["CRUD de Usuarios"],
+        "summary": "Cadastrar novo usuário",
+        "responses": {
+          "201": {
+            "description": "Usuário criado com sucesso"
+          }
+        }
+      }
+    },
+    "/api/usuarios/{id}": {
+      "put": {
+        "tags": ["CRUD de Usuarios"],
+        "summary": "Atualizar um usuário existente",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {
+          "202": {
+            "description": "Usuário atualizado com sucesso"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["CRUD de Usuarios"],
+        "summary": "Excluir um usuário",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {
+          "204": {
+            "description": "Usuário excluído com sucesso"
+          }
+        }
+      }
+    },
+    "/api/produtos": {
+      "get": {
+        "tags": ["CRUD de Produtos"],
+        "summary": "Listar todos os produtos",
+        "responses": {
+          "200": {
+            "description": "Lista de produtos"
+          }
+        }
+      },
+      "post": {
+        "tags": ["CRUD de Produtos"],
+        "summary": "Cadastrar novo produto",
+        "responses": {
+          "201": {
+            "description": "Produto criado com sucesso"
+          }
+        }
+      }
+    },
+    "/api/produtos/{id}": {
+      "put": {
+        "tags": ["CRUD de Produtos"],
+        "summary": "Atualizar um produto",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {
+          "202": {
+            "description": "Produto atualizado com sucesso"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["CRUD de Produtos"],
+        "summary": "Excluir um produto",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {
+          "204": {
+            "description": "Produto excluído com sucesso"
+          }
+        }
+      }
+    },
+    "/api/pedidos": {
+      "get": {
+        "tags": ["CRUD de Pedidos"],
+        "summary": "Listar todos os pedidos",
+        "responses": {
+          "200": {
+            "description": "Lista de pedidos"
+          }
+        }
+      },
+      "post": {
+        "tags": ["CRUD de Pedidos"],
+        "summary": "Cadastrar novo pedido",
+        "responses": {
+          "201": {
+            "description": "Pedido criado com sucesso"
+          }
+        }
+      }
+    },
+    "/api/pedidos/{id}": {
+      "put": {
+        "tags": ["CRUD de Pedidos"],
+        "summary": "Atualizar um pedido",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {
+          "202": {
+            "description": "Pedido atualizado com sucesso"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["CRUD de Pedidos"],
+        "summary": "Excluir um pedido",
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {
+          "204": {
+            "description": "Pedido excluído com sucesso"
+          }
+        }
+      }
+    }
+  }
 }
