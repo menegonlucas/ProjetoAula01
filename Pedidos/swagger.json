@@ -1,0 +1,70 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API de Produtos (Node + Prisma + MySQL[MariaDB])",
+        "version": "1.0.0",
+        "description": "Documentação da API Pedidos"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3001",
+            "description": "Servidor local"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Teste",
+            "description": "Endpoint de teste da API"
+        },
+        {
+            "name": "CRUD de Usuarios",
+            "description": "Endpoints de usuarios"
+        }
+    ],
+    "paths": {
+        "/": {
+            "get": {
+                "tags": [
+                    "Teste"
+                ],
+                "summary": "Endpoint de teste geral da API",
+                "responses": {
+                    "200": {
+                        "description": "Retorna uma mensagem de teste"
+                    },
+                    "500": {
+                        "description": "Erro ao processar a requisição"
+                    }
+                }
+            }
+        },
+        "/api/usuarios": {
+            "get": {
+                "tags": [
+                    {
+                        "nam": "CRUD de Usuarios"
+                    }
+                ],
+                "summary": "Endpoint para obter todos os usuários",
+                "responses": {
+                    "200": {
+                        "description": "Lista de usuários cadastrados"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    {
+                        "nam": "CRUD de Usuarios"
+                    }
+                ],
+                "summary": "Endpoint para cadastrar novo usuário",
+                "responses": {
+                    "200": {
+                        "description": "Novo usuário"
+                    }
+                }
+            }
+        }
+    }
+}
