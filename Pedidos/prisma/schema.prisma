@@ -8,12 +8,12 @@ datasource db {
 }
 
 model Usuario {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  nome      String
-  senha     String
-  tipo      Tipo
-  pedidos   Pedido[]
+  id      Int      @id @default(autoincrement())
+  email   String   @unique
+  nome    String
+  senha   String
+  tipo    Tipo
+  pedidos Pedido[]
 }
 
 enum Tipo {
@@ -31,11 +31,11 @@ model Produto {
 }
 
 model Pedido {
-  id        Int      @id @default(autoincrement())
-  usuarioId Int
-  produtoId Int
+  id         Int      @id @default(autoincrement())
+  usuarioId  Int
+  produtoId  Int
   quantidade Int
-  data      DateTime @default(now())
-  usuario   Usuario  @relation(fields: [usuarioId], references: [id])
-  produto   Produto  @relation(fields: [produtoId], references: [id])
+  data       DateTime @default(now())
+  usuario    Usuario  @relation(fields: [usuarioId], references: [id])
+  produto    Produto  @relation(fields: [produtoId], references: [id])
 }
