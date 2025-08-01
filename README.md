@@ -361,6 +361,7 @@ Acesse:
 Inclua aqui:
 - Captura de tela do Insomnia/Postman testando as rotas.
 - Captura de tela da interface Swagger funcionando.
+![alt text](image.png)
 
 ---
 
