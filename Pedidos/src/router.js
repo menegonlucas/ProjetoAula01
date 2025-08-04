@@ -1,27 +1,32 @@
 const express = require('express');
 const routes = express.Router();
 
+const Login = require('./controllers/login');
 const Usuario = require('./controllers/usuario');
 const Produto = require('./controllers/produto');
 const Pedido = require('./controllers/pedido');
+const MiddlewareAuth = require('./middlewares/auth');
 
 routes.get('/', (req, res) => {
     res.json({ titulo: 'API Pedidos respondendo, documentação em /docs' });
 });
 
-routes.get('/api/usuarios', Usuario.read);
+routes.post('/api/login', Login.login);
+routes.get('/api/validacao', Login.validaToken);
+
+routes.get('/api/usuarios', MiddlewareAuth, Usuario.read);
 routes.post('/api/usuarios', Usuario.create);
-routes.patch('/api/usuarios/:id', Usuario.update);
-routes.delete('/api/usuarios/:id', Usuario.del);
+routes.patch('/api/usuarios/:id', MiddlewareAuth, Usuario.update);
+routes.delete('/api/usuarios/:id', MiddlewareAuth, Usuario.del);
 
 routes.get('/api/produtos', Produto.read);
-routes.post('/api/produtos', Produto.create);
-routes.patch('/api/produtos/:id', Produto.update);
-routes.delete('/api/produtos/:id', Produto.del);
+routes.post('/api/produtos', MiddlewareAuth, Produto.create);
+routes.patch('/api/produtos/:id', MiddlewareAuth, Produto.update);
+routes.delete('/api/produtos/:id', MiddlewareAuth, Produto.del);
 
-routes.get('/api/pedidos', Pedido.read);
-routes.post('/api/pedidos', Pedido.create);
-routes.patch('/api/pedidos/:id', Pedido.update);
-routes.delete('/api/pedidos/:id', Pedido.del);
+routes.get('/api/pedidos', MiddlewareAuth, Pedido.read);
+routes.post('/api/pedidos', MiddlewareAuth, Pedido.create);
+routes.patch('/api/pedidos/:id', MiddlewareAuth, Pedido.update);
+routes.delete('/api/pedidos/:id', MiddlewareAuth, Pedido.del);
 
 module.exports = routes;

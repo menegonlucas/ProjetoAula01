@@ -27,6 +27,10 @@
         {
             "name": "CRUD de Pedidos",
             "description": "Endpoints de pedidos"
+        },
+        {
+            "name": "Autenticação",
+            "description": "Endpoints de login e validação"
         }
     ],
     "paths": {
@@ -220,7 +224,7 @@
                                     "preco": {
                                         "type": "number",
                                         "format": "float",
-                                        "example": 79.90
+                                        "example": 79.9
                                     }
                                 }
                             }
@@ -354,12 +358,6 @@
                                         "type": "string",
                                         "example": "PENDENTE"
                                     }
-                                },
-                                "example": {
-                                    "usuarioId": 1,
-                                    "produtoId": 2,
-                                    "quantidade": 3,
-                                    "status": "PENDENTE"
                                 }
                             }
                         }
@@ -443,6 +441,104 @@
                     },
                     "400": {
                         "description": "Erro ao excluir pedido"
+                    }
+                }
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "summary": "Realiza login e retorna um token JWT",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "senha": {
+                                        "type": "string"
+                                    },
+                                    "validade": {
+                                        "type": "string",
+                                        "description": "Tempo de expiração em minutos (opcional)"
+                                    }
+                                },
+                                "required": [
+                                    "email",
+                                    "senha"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Token JWT gerado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "token": {
+                                            "type": "string",
+                                            "description": "Token JWT gerado para autenticação"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Credenciais inválidas"
+                    }
+                }
+            }
+        },
+        "/api/validacao": {
+            "get": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "summary": "Valida o token JWT enviado no header Authorization",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Token válido",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "object",
+                                            "description": "Dados decodificados do token JWT"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Token ausente"
+                    },
+                    "403": {
+                        "description": "Token inválido ou expirado"
                     }
                 }
             }
