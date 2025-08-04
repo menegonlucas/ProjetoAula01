@@ -180,6 +180,272 @@
                     }
                 }
             }
+        },
+        "/api/produtos": {
+            "get": {
+                "tags": [
+                    "CRUD de Produtos"
+                ],
+                "summary": "Endpoint para obter todos os produtos",
+                "responses": {
+                    "200": {
+                        "description": "Lista de produtos cadastrados"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "CRUD de Produtos"
+                ],
+                "summary": "Endpoint para cadastrar novo produto",
+                "requestBody": {
+                    "description": "Dados do produto",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "Camiseta Polo"
+                                    },
+                                    "descricao": {
+                                        "type": "string",
+                                        "example": "Camiseta confortável de algodão"
+                                    },
+                                    "imagem": {
+                                        "type": "string",
+                                        "example": "https://exemplo.com/imagens/camiseta.jpg"
+                                    },
+                                    "preco": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 79.90
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Produto cadastrado"
+                    },
+                    "400": {
+                        "description": "Erro ao cadastrar produto"
+                    }
+                }
+            }
+        },
+        "/api/produtos/{id}": {
+            "put": {
+                "tags": [
+                    "CRUD de Produtos"
+                ],
+                "summary": "Endpoint para atualizar um produto",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID do produto",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Novos dados do produto",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "nome": {
+                                        "type": "string"
+                                    },
+                                    "descricao": {
+                                        "type": "string"
+                                    },
+                                    "preco": {
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "estoque": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Produto atualizado"
+                    },
+                    "400": {
+                        "description": "Erro ao atualizar produto"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "CRUD de Produtos"
+                ],
+                "summary": "Endpoint para excluir um produto",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID do produto",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Produto excluído"
+                    },
+                    "400": {
+                        "description": "Erro ao excluir produto"
+                    }
+                }
+            }
+        },
+        "/api/pedidos": {
+            "get": {
+                "tags": [
+                    "CRUD de Pedidos"
+                ],
+                "summary": "Endpoint para obter todos os pedidos",
+                "responses": {
+                    "200": {
+                        "description": "Lista de pedidos cadastrados"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "CRUD de Pedidos"
+                ],
+                "summary": "Endpoint para cadastrar novo pedido",
+                "requestBody": {
+                    "description": "Dados do pedido",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "usuarioId": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "produtoId": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "quantidade": {
+                                        "type": "integer",
+                                        "example": 3
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "PENDENTE"
+                                    }
+                                },
+                                "example": {
+                                    "usuarioId": 1,
+                                    "produtoId": 2,
+                                    "quantidade": 3,
+                                    "status": "PENDENTE"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Pedido criado"
+                    },
+                    "400": {
+                        "description": "Erro ao criar pedido"
+                    }
+                }
+            }
+        },
+        "/api/pedidos/{id}": {
+            "put": {
+                "tags": [
+                    "CRUD de Pedidos"
+                ],
+                "summary": "Endpoint para atualizar um pedido",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID do pedido",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Atualização de dados do pedido",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "status": {
+                                        "type": "string",
+                                        "default": "ENVIADO"
+                                    },
+                                    "quantidade": {
+                                        "type": "integer",
+                                        "default": 2
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Pedido atualizado"
+                    },
+                    "400": {
+                        "description": "Erro ao atualizar pedido"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "CRUD de Pedidos"
+                ],
+                "summary": "Endpoint para excluir um pedido",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID do pedido",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Pedido excluído"
+                    },
+                    "400": {
+                        "description": "Erro ao excluir pedido"
+                    }
+                }
+            }
         }
     }
 }

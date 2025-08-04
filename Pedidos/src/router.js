@@ -6,7 +6,7 @@ const Produto = require('./controllers/produto');
 const Pedido = require('./controllers/pedido');
 
 routes.get('/', (req, res) => {
-    res.json({ titulo: 'API Pedidos respondendo' });
+    res.json({ titulo: 'API Pedidos respondendo, documentação em /docs' });
 });
 
 routes.get('/api/usuarios', Usuario.read);
